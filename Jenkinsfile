@@ -2,26 +2,13 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout Code') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Deploy to Nginx') {
+        stage('Deploy Website') {
             steps {
                 sh '''
                 echo "Deploying website..."
-                cp -r * /var/www/website/
-                '''
-            }
-        }
-
-        stage('Restart Nginx') {
-            steps {
-                sh '''
+                cp index.html /var/www/website/
                 sudo systemctl reload nginx
-                echo "Deployment completed successfully"
+                echo "Deployment completed"
                 '''
             }
         }
